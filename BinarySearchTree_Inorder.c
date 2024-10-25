@@ -9,6 +9,11 @@ struct Node
 struct Node *newNode(int key)
 {
     struct Node *node = (struct Node *)malloc(sizeof(struct Node));
+    if(!node)
+    {
+        fprintf(stderr,"Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
     node->key = key;
     node->left = NULL;
     node->right = NULL;
@@ -106,7 +111,13 @@ int main()
         printf("\n3.Inorder Traversal");
         printf("\n4.Exit");
         printf("\nEnter your choice: ");
-        scanf("%d", &choice);
+        if(scanf("%d",&choice)!=1)
+        {
+          printf("\nInvalid Input. Please enter an Integer:\n");
+          while(getchar()!='\n');
+          choice = 0;
+          continue;
+        }
         switch (choice)
         {
         case 1:
