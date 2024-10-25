@@ -52,6 +52,7 @@ int delete(struct Queue *queue)
         return x;
     }
     queue->front = queue->front->next;
+    free(temp);
     return x;
 }
 void display(struct Queue *queue)
