@@ -101,7 +101,7 @@ void infixToPostfix(struct Stack *stack, char *infix, char *postfix)
         }
         else if (token == '+' || token == '-' || token == '*' || token == '/' || token == '^')
         {
-            while (stack->top != NULL && precedence(peek(stack)) >= precedence(token))
+            while(stack->top != NULL && (precedence(peek(stack))>precedence(token) || (precedence(peek(stack)) == precedence(token) && token != '^')))
             {
                 postfix[j++] = pop(stack);
             }
