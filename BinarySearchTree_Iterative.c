@@ -16,11 +16,23 @@ struct Node *createNode(int data)
 }
 void inorder(struct Node *root)
 {
-    if (root != NULL)
+    if (root == NULL)
     {
-        inorder(root->left);
-        printf("%d ", root->data);
-        inorder(root->right);
+        return;
+    }
+    struct Node *stack[100];
+    int top = -1;
+    struct Node *current = root;
+    while (current != NULL || top != -1)
+    {
+        while (current != NULL)
+        {
+            stack[++top] = current;
+            current = current->left;
+        }
+        current = stack[top--];
+        printf("%d ", current->data);
+        current = current->right;
     }
 }
 void freeTree(struct Node *root)
@@ -141,8 +153,7 @@ int main()
         if (scanf("%d", &choice) != 1)
         {
             printf("\nYou have entered an non-integer");
-            while (getchar() != '\n')
-                ;
+            while (getchar() != '\n');
             choice = 0;
             continue;
         }
